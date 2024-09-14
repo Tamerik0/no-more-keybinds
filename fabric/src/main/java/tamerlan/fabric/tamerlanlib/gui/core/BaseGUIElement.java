@@ -3,6 +3,7 @@ package tamerlan.fabric.tamerlanlib.gui.core;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.math.Vec2f;
+import tamerlan.fabric.menu.RoundGroupMenuItem;
 import tamerlan.fabric.tamerlanlib.core.IRemovable;
 import tamerlan.fabric.Mod2Client;
 import tamerlan.fabric.Mouse;
@@ -13,10 +14,11 @@ import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 public class BaseGUIElement extends TransformableRenderable implements GUIContainerProvider, InputHandlerProvider, IAreaProvider, IRemovable {
     final GUIContainer container = new GUIContainer();
     final InputHandler inputHandler = new InputHandler();
+
     public IGUIArea area = new IGUIArea() {
         @Override
         public boolean isInsideArea(Vec2f pos) {
-            return pos.length() < 30;
+            return pos.length() < RoundGroupMenuItem.elementRadius;
         }
     };
     BaseGUIElement parent;

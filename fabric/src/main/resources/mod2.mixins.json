@@ -5,12 +5,13 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
-    "InputUtilMixin",
     "InputUtilKeyAccessor",
+    "InputUtilMixin",
     "KeyBindingAccessor",
     "KeyboardMixin",
     "MouseMixin",
-    "RenderMixin"
+    "RenderMixin",
+    "TexturesAccessor"
   ],
   "server": [],
   "injectors": {
