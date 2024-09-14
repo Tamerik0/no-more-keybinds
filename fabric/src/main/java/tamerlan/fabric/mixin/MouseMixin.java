@@ -26,10 +26,6 @@ public abstract class MouseMixin implements IExtendedMouse {
         return menuCursorPos;
     }
 
-    public Vec2f getPos() {
-        return new Vec2f((float) this.x, (float) this.y);
-    }
-
     @Inject(at = @At(value = "HEAD"), method = "tick", cancellable = true)
     public void tick(CallbackInfo ci) {
         if (Menu.isOpened()) {

@@ -7,68 +7,25 @@ import org.joml.AxisAngle4d;
 import org.joml.Quaternionf;
 import org.joml.Vector3d;
 
-public class TransformedElement implements IRenderable {
+public class TransformedElement extends TransformableRenderable {
     IRenderable widget;
-    Transform2D transform;
 
     public TransformedElement(IRenderable widget) {
-        this.widget = widget;
+        this(widget, new Transform2D());
     }
     public TransformedElement(IRenderable widget, Transform2D transform) {
-        this(widget);
-        this.transform = transform;
+        super(transform);
+        this.widget = widget;
     }
 
 
     public TransformedElement(TransformedElement other) {
+        super(other);
         this.widget = other.widget;
-        this.transform = new Transform2D(other.transform);
-    }
-
-    public TransformedElement translate(Vec2f dir) {
-        transform.translate(dir);
-        return this;
-    }
-
-    public TransformedElement translated(Vec2f dir) {
-        return new TransformedElement(this).translate(dir);
-    }
-
-    public TransformedElement setZ(int zOffset) {
-        transform.zOffset = zOffset;
-        return this;
-    }
-
-    public TransformedElement withZ(int z) {
-        return new TransformedElement(this).setZ(z);
-    }
-
-    public TransformedElement scale(Vec2f scale) {
-        transform.scale(scale);
-        return this;
-    }
-
-    public TransformedElement scaled(Vec2f scale) {
-        return new TransformedElement(this).scale(scale);
-    }
-
-    public TransformedElement rotate(float r) {
-        transform.rotate(r);
-        return this;
-    }
-
-    public TransformedElement rotated(float r) {
-        return new TransformedElement(this).rotate(r);
     }
 
     @Override
-    public void render(DrawContext context) {
-        MatrixStack matrices = context.getMatrices();
-        matrices.push();
-        matrices.scale(transform.scale.x, transform.scale.y, 1);
-        matrices.multiply(new Quaternionf(new AxisAngle4d(transform.rotation, new Vector3d(0, 0, 1))));
-        matrices.translate(transform.pos.x, transform.pos.y, transform.zOffset);
+    public void renderWithoutTransform(DrawContext context) {
         widget.render(context);
-        matrices.pop();
     }
 }

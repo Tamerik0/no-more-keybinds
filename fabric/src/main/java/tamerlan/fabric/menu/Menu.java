@@ -11,8 +11,11 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec2f;
+import tamerlan.fabric.Mouse;
 import tamerlan.fabric.data.RoundGroupData;
 import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.gui.core.BaseGUIElement;
+import tamerlan.fabric.gui.events.MouseEvents;
 import tamerlan.fabric.mixin.KeyBindingAccessor;
 import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
@@ -59,7 +62,7 @@ public class Menu {
     }
 
     final Vec2f centerPos;
-    MenuItem rootItem;
+    BaseGUIElement rootItem;
 
 
     public Menu() {
@@ -103,7 +106,7 @@ public class Menu {
 
     public void render(DrawContext context, int mouseX, int mouseY) {
 
-        rootItem.fullRenderAndUpdate(context, new Vec2f(mouseX, mouseY));
+        rootItem.render(context);
     }
 
     void remove() {
@@ -113,6 +116,7 @@ public class Menu {
 
     public static void mouseClicked(MinecraftClient client, int button, int action, int mods) {
 //        Mod2Client.LOGGER.info("mouseClicked");
-        instance.rootItem.mouseClicked(client, button, action, mods);
+
+        instance.rootItem.getInputHandler().listenEvent(new MouseEvents.MouseEvent(MouseEvents.MouseEventType.CLICK.type, button, action, mods, Mouse.getMouseScreenPos()));
     }
 }

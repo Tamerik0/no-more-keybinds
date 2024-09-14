@@ -9,14 +9,16 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec2f;
 import org.lwjgl.glfw.GLFW;
 import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.gui.core.BaseGUIElement;
+import tamerlan.fabric.gui.events.MouseEvents;
 import tamerlan.fabric.keyemulation.SimpleKeyBindingPressEmulator;
 import tamerlan.fabric.keyemulation.Util;
 import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
-public class KeyBindMenuItem extends MenuItem {
+public class KeyBindMenuItem extends BaseGUIElement {
     KeyBinding keyBinding;
     SimpleKeyBindingPressEmulator emulator;
-    public KeyBindMenuItem(MenuItem parent, Vec2f pos, KeyBinding keyBinding) {
+    public KeyBindMenuItem(BaseGUIElement parent, Vec2f pos, KeyBinding keyBinding) {
         super(parent, pos);
         this.keyBinding = keyBinding;
         if(KeyBindingHelper.getBoundKeyOf(keyBinding)==InputUtil.UNKNOWN_KEY){
@@ -28,21 +30,16 @@ public class KeyBindMenuItem extends MenuItem {
 
 
     @Override
-    protected boolean isPosInsideArea(Vec2f pos) {
-        return Math.sqrt(this.pos.distanceSquared(pos)) < 50;
-    }
-
-    @Override
-    protected void renderContent(DrawContext context, Vec2f mousePos) {
+    protected void renderContent(DrawContext context) {
         emulator.tick();
-        context.drawText(MinecraftClient.getInstance().textRenderer, Text.translatable(keyBinding.getTranslationKey()), (int) pos.x, (int) pos.y, 0xFFFFFF, true);
+        context.drawText(MinecraftClient.getInstance().textRenderer, Text.translatable(keyBinding.getTranslationKey()), (int) transform.pos.x, (int) transform.pos.y, 0xFFFFFF, true);
     }
 
     @Override
-    protected void onClick(int button, int action, int mods) {
-        if (button == GLFW.GLFW_MOUSE_BUTTON_1) {
-            Mod2Client.LOGGER.info(String.valueOf(action));
-            if (action == 1) {
+    protected void onClick(MouseEvents.MouseEvent event) {
+        if (event.button == GLFW.GLFW_MOUSE_BUTTON_1) {
+            Mod2Client.LOGGER.info(String.valueOf(event.action));
+            if (event.action == 1) {
                 ((IExtendedMouse) MinecraftClient.getInstance().mouse).setTimer(10);
                 emulator.press();
             } else{
