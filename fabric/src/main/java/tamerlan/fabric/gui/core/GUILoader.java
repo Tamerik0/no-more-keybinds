@@ -2,41 +2,46 @@ package tamerlan.fabric.gui.core;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import tamerlan.fabric.gui.inputevents.InputHandler;
+import tamerlan.fabric.gui.events.InputHandler;
 
 import java.util.HashMap;
 
-public abstract class GUILoader<T extends IRenderable> {
+public abstract class GUILoader<T> {
     static HashMap<String, GUILoader> loaders;
 
     protected ChildLoader getChildLoader(T obj) {
-        if (obj instanceof ContainerBasedRenderable || obj instanceof InputHandlerBased) {
+        if (obj instanceof GUIContainerProvider || obj instanceof InputHandlerProvider) {
             return new DefaultChildLoader(obj);
         }
         return null;
     }
 
-    public abstract static class ChildLoader {
-        public abstract void load(JsonElement json);
+    public interface ChildLoader {
+        void load(JsonElement json);
     }
 
-    static class DefaultChildLoader extends ChildLoader {
+    static class DefaultChildLoader implements ChildLoader {
         GUIContainer container;
         InputHandler inputHandler;
         public DefaultChildLoader(Object obj) {
-            if(obj instanceof ContainerBasedRenderable castedObj)
+            if(obj instanceof GUIContainerProvider castedObj)
                 container = castedObj.getContainer();
-            if(obj instanceof InputHandlerBased castedObj)
+            if(obj instanceof InputHandlerProvider castedObj)
                 inputHandler = castedObj.getInputHandler();
         }
 
         @Override
         public void load(JsonElement json) {
-            var obj = json.getAsJsonObject();
-            if(container!=null)
-                container.addRenderable(GUILoader.staticLoad(json.getAsJsonObject()));
+            var obj = GUILoader.staticLoad(json.getAsJsonObject());
+            if(container!=null) {
+                if(obj instanceof IRenderable castedObj)
+                    container.addRenderable(castedObj);
+            }
             if(inputHandler != null){
-                inputHandler.addListener(obj);
+                if(obj instanceof InputHandler castedObj)
+                    inputHandler.addListener(castedObj);
+                if(obj instanceof InputHandlerProvider castedObj)
+                    inputHandler.addListener(castedObj);
             }
         }
     }
@@ -54,7 +59,7 @@ public abstract class GUILoader<T extends IRenderable> {
         return obj;
     }
 
-    public static IRenderable staticLoad(JsonObject json) {
+    public static Object staticLoad(JsonObject json) {
         return loaders.get(json.get("type").getAsString()).load(json.get("obj"));
     }
 }

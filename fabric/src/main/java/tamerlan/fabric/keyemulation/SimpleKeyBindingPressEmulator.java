@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import tamerlan.fabric.Mouse;
 import tamerlan.fabric.mixininterfaces.IExtendedKeyboard;
 import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
@@ -57,7 +58,7 @@ public class SimpleKeyBindingPressEmulator {
         if (screen == null)
             return false;
         if (key.getCategory() == InputUtil.Type.MOUSE) {
-            var pos = IExtendedMouse.toScreenSpace(((IExtendedMouse) MinecraftClient.getInstance().mouse).getPos());
+            var pos = Mouse.getMouseScreenPos();
             if (action == 0)
                 screen.mouseReleased(pos.x, pos.y, key.getCode());
             else if (action == 1)
