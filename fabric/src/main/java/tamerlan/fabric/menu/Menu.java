@@ -12,12 +12,14 @@ import net.minecraft.util.math.Vec2f;
 import tamerlan.fabric.Mouse;
 import tamerlan.fabric.data.RoundGroupData;
 import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.mixin.TexturesAccessor;
 import tamerlan.fabric.tamerlanlib.gui.core.BaseGUIElement;
 import tamerlan.fabric.tamerlanlib.events.MouseEvents;
 import tamerlan.fabric.mixin.KeyBindingAccessor;
 import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 @Environment(EnvType.CLIENT)
@@ -76,8 +78,8 @@ public class Menu {
             var category = keyBinding.getCategory();
             RoundGroupData d = null;
             for (var group : l) {
-                if (((RoundGroupData) group).name == category) {
-                    d = (RoundGroupData) group;
+                if (Objects.equals(group.name, category)) {
+                    d = group;
                 }
             }
             if (d == null) {

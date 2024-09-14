@@ -10,18 +10,21 @@ import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
 public class SimpleKeyBindingPressEmulator {
     KeyBinding keyBinding;
+    InputUtil.Key key;
     private int state;
     private long timer;
     private long lastTickTime;
 
     public SimpleKeyBindingPressEmulator(KeyBinding keyBinding) {
         this.keyBinding = keyBinding;
+        this.key = KeyBindingHelper.getBoundKeyOf(keyBinding);
     }
 
     public void press() {
-        if (!updateScreen(1))
-            KeyBinding.onKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding));
-        KeyBinding.setKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding), true);
+        MinecraftClient.getInstance().keyboard.onKey(MinecraftClient.getInstance().getWindow().getHandle(),key.getCategory() == InputUtil.Type.KEYSYM ? key.getCode() : -1, key.getCategory() == InputUtil.Type.SCANCODE ? key.getCode() : -1,1, ((IExtendedKeyboard) MinecraftClient.getInstance().keyboard).getMods());
+//        if (!updateScreen(1))
+//            KeyBinding.onKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding));
+//        KeyBinding.setKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding), true);
         lastTickTime = System.currentTimeMillis();
         if (state == 0) {
             timer = 0;
@@ -30,8 +33,9 @@ public class SimpleKeyBindingPressEmulator {
     }
 
     public void release() {
-        updateScreen(0);
-        KeyBinding.setKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding), false);
+        MinecraftClient.getInstance().keyboard.onKey(MinecraftClient.getInstance().getWindow().getHandle(),key.getCategory() == InputUtil.Type.KEYSYM ? key.getCode() : -1, key.getCategory() == InputUtil.Type.SCANCODE ? key.getCode() : -1,0, ((IExtendedKeyboard) MinecraftClient.getInstance().keyboard).getMods());
+//        updateScreen(0);
+//        KeyBinding.setKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding), false);
         state = 0;
         timer = 0;
     }
@@ -46,10 +50,13 @@ public class SimpleKeyBindingPressEmulator {
                 state = 2;
                 tick();
             }
-        } else if (!updateScreen(2))
-            if (KeyBindingHelper.getBoundKeyOf(keyBinding).getCategory() != InputUtil.Type.MOUSE)
-                KeyBinding.onKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding));
-        KeyBinding.setKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding), true);
+//        } else if (!updateScreen(2))
+//            if (KeyBindingHelper.getBoundKeyOf(keyBinding).getCategory() != InputUtil.Type.MOUSE)
+//                KeyBinding.onKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding));
+        }else{
+            MinecraftClient.getInstance().keyboard.onKey(MinecraftClient.getInstance().getWindow().getHandle(),key.getCategory() == InputUtil.Type.KEYSYM ? key.getCode() : -1, key.getCategory() == InputUtil.Type.SCANCODE ? key.getCode() : -1,2, ((IExtendedKeyboard) MinecraftClient.getInstance().keyboard).getMods());
+        }
+//        KeyBinding.setKeyPressed(KeyBindingHelper.getBoundKeyOf(keyBinding), true);
     }
 
     boolean updateScreen(int action) {
