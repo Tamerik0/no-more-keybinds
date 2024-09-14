@@ -6,16 +6,14 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Items;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec2f;
 import tamerlan.fabric.Mouse;
 import tamerlan.fabric.data.RoundGroupData;
 import tamerlan.fabric.Mod2Client;
-import tamerlan.fabric.gui.core.BaseGUIElement;
-import tamerlan.fabric.gui.events.MouseEvents;
+import tamerlan.fabric.tamerlanlib.gui.core.BaseGUIElement;
+import tamerlan.fabric.tamerlanlib.events.MouseEvents;
 import tamerlan.fabric.mixin.KeyBindingAccessor;
 import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
@@ -116,7 +114,7 @@ public class Menu {
 
     public static void mouseClicked(MinecraftClient client, int button, int action, int mods) {
 //        Mod2Client.LOGGER.info("mouseClicked");
-
-        instance.rootItem.getInputHandler().listenEvent(new MouseEvents.MouseEvent(MouseEvents.MouseEventType.CLICK.type, button, action, mods, Mouse.getMouseScreenPos()));
+        Mod2Client.LOGGER.info("mouseClickedMenu");
+        instance.rootItem.getInputHandler().listenEvent(new MouseEvents.MouseEvent(MouseEvents.MouseEventType.COMMON.type, button, action, mods, Mouse.getMouseScreenPos()));
     }
 }
