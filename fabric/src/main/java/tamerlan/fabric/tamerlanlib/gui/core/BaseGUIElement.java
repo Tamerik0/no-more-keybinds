@@ -5,7 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.math.Vec2f;
 import tamerlan.fabric.menu.RoundGroupMenuItem;
 import tamerlan.fabric.tamerlanlib.core.IRemovable;
-import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.NMKClient;
 import tamerlan.fabric.Mouse;
 import tamerlan.fabric.tamerlanlib.events.InputHandler;
 import tamerlan.fabric.tamerlanlib.events.MouseEvents;
@@ -46,7 +46,7 @@ public class BaseGUIElement extends TransformableRenderable implements GUIContai
     }
 
     private void mouseClicked(MouseEvents.MouseEvent event) {
-        Mod2Client.LOGGER.info("mouseClicked " + underCursor);
+        NMKClient.LOGGER.info("mouseClicked " + underCursor);
         if (underCursor) {
             onClick(event);
         }
@@ -122,7 +122,7 @@ public class BaseGUIElement extends TransformableRenderable implements GUIContai
     }
 
     protected void onClick(MouseEvents.MouseEvent event) {
-        Mod2Client.LOGGER.info("onClickBase");
+        NMKClient.LOGGER.info("onClickBase");
     }
 
     protected void onMouseExit() {

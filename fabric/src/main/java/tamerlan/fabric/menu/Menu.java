@@ -11,8 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.math.Vec2f;
 import tamerlan.fabric.Mouse;
 import tamerlan.fabric.data.RoundGroupData;
-import tamerlan.fabric.Mod2Client;
-import tamerlan.fabric.mixin.TexturesAccessor;
+import tamerlan.fabric.NMKClient;
 import tamerlan.fabric.tamerlanlib.gui.core.BaseGUIElement;
 import tamerlan.fabric.tamerlanlib.events.MouseEvents;
 import tamerlan.fabric.mixin.KeyBindingAccessor;
@@ -48,7 +47,7 @@ public class Menu {
 
     static {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (InputUtil.isKeyPressed(client.getWindow().getHandle(), KeyBindingHelper.getBoundKeyOf(Mod2Client.keyBinding).getCode()) && !(MinecraftClient.getInstance().currentScreen instanceof EditorScreen)) {
+            if (InputUtil.isKeyPressed(client.getWindow().getHandle(), KeyBindingHelper.getBoundKeyOf(NMKClient.keyBinding).getCode()) && !(MinecraftClient.getInstance().currentScreen instanceof EditorScreen)) {
                 if (instance == null) {
                     instance = new Menu();
                 }
@@ -116,7 +115,7 @@ public class Menu {
 
     public static void mouseClicked(MinecraftClient client, int button, int action, int mods) {
 //        Mod2Client.LOGGER.info("mouseClicked");
-        Mod2Client.LOGGER.info("mouseClickedMenu");
+        NMKClient.LOGGER.info("mouseClickedMenu");
         instance.rootItem.getInputHandler().listenEvent(new MouseEvents.MouseEvent(MouseEvents.MouseEventType.COMMON.type, button, action, mods, Mouse.getMouseScreenPos()));
     }
 }

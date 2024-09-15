@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'mod2'
+rootProject.name = 'no_more_keybinds'
 
 include 'common'
 include 'fabric'

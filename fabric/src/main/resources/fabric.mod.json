@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "mod2",
+  "id": "no_more_keybinds",
   "version": "${version}",
-  "name": "Mod2",
+  "name": "No more keybinds",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -12,18 +12,18 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
   "license": "CC0-1.0",
-  "icon": "assets/mod2/icon.png",
+  "icon": "assets/no_more_keybinds/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "tamerlan.fabric.Mod2"
+      "tamerlan.fabric.NMK"
     ],
     "client": [
-      "tamerlan.fabric.Mod2Client"
+      "tamerlan.fabric.NMKClient"
     ]
   },
   "mixins": [
-    "mod2.mixins.json"
+    "no_more_keybinds.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.4",

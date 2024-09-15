@@ -1,6 +1,6 @@
 package tamerlan.fabric.tamerlanlib.events;
 
-import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.NMKClient;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ public class MouseEventDispatcher extends EventDispatcher {
     }
     @Override
     protected List<IEvent> dispatchEvent(IEvent event) {
-        Mod2Client.LOGGER.info("MouseEventHandler(Dispatcher) "+event.getEventType());
+        NMKClient.LOGGER.info("MouseEventHandler(Dispatcher) "+event.getEventType());
         if (event instanceof MouseEvents.MouseEvent mouseEvent) {
-            Mod2Client.LOGGER.info("owowowo "+mouseEvent.mousePos +" "+mouseEvent.action);
+            NMKClient.LOGGER.info("owowowo "+mouseEvent.mousePos +" "+mouseEvent.action);
             if(event.getEventType() == MouseEvents.MouseEventType.COMMON.type) {
-                Mod2Client.LOGGER.info("brbrbrbbaba "+event.getEventType());
+                NMKClient.LOGGER.info("brbrbrbbaba "+event.getEventType());
                 if (mouseEvent.action == 1) {
                     return List.of(new MouseEvents.MouseEvent(MouseEvents.MouseEventType.CLICK.type, mouseEvent.button, mouseEvent.action, mouseEvent.mods, mouseEvent.mousePos));
                 } else if (mouseEvent.action == 0) {

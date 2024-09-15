@@ -7,12 +7,10 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec2f;
-import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
-import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.NMKClient;
 import tamerlan.fabric.tamerlanlib.gui.core.BaseGUIElement;
 import tamerlan.fabric.tamerlanlib.events.MouseEvents;
 import tamerlan.fabric.keyemulation.SimpleKeyBindingPressEmulator;
@@ -42,7 +40,7 @@ public class KeyBindMenuItem extends BaseGUIElement {
         context.getMatrices().push();
         context.getMatrices().scale(size/256, size/256, 1);
         RenderSystem.enableBlend();
-        context.drawTexture(Identifier.of("mod2","textures/ui/circle.png"),(int)center.x-128,(int)center.y-128,0,0,256,256);
+        context.drawTexture(Identifier.of("mo_more_keybinds","textures/ui/circle.png"),(int)center.x-128,(int)center.y-128,0,0,256,256);
         RenderSystem.disableBlend();
         context.getMatrices().pop();
         var text = Text.translatable(keyBinding.getTranslationKey());
@@ -52,9 +50,9 @@ public class KeyBindMenuItem extends BaseGUIElement {
     @Override
     protected void onClick(MouseEvents.MouseEvent event) {
         super.onClick(event);
-        Mod2Client.LOGGER.info("onClickKeybind");
+        NMKClient.LOGGER.info("onClickKeybind");
         if (event.button == GLFW.GLFW_MOUSE_BUTTON_1) {
-            Mod2Client.LOGGER.info(String.valueOf(event.action));
+            NMKClient.LOGGER.info(String.valueOf(event.action));
             ((IExtendedMouse) MinecraftClient.getInstance().mouse).setTimer(10);
             emulator.press();
         }
