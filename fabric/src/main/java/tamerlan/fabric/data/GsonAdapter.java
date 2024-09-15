@@ -1,7 +1,7 @@
 package tamerlan.fabric.data;
 
 import com.google.gson.*;
-import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.NMKClient;
 
 import java.lang.reflect.Type;
 
@@ -18,7 +18,7 @@ public class GsonAdapter implements JsonSerializer<GsonSerializable>, JsonDeseri
         try {
             obj.obj = new Gson().fromJson(json.getAsJsonObject().get("object"), Class.forName(json.getAsJsonObject().get("type").getAsString()));
         } catch (Exception e) {
-            Mod2Client.LOGGER.error(e.getMessage());
+            NMKClient.LOGGER.error(e.getMessage());
         }
         return obj;
     }

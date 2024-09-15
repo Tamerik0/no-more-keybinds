@@ -1,7 +1,7 @@
 package tamerlan.fabric.tamerlanlib.events;
 
 import tamerlan.fabric.tamerlanlib.core.ContainerClass;
-import tamerlan.fabric.Mod2Client;
+import tamerlan.fabric.NMKClient;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,9 +24,9 @@ public class EventHandler<T extends IEvent> extends ContainerClass<EventListener
 
     @Override
     public void listenEvent(T event) {
-        Mod2Client.LOGGER.info("listenEvent "+getClass().getName());
+        NMKClient.LOGGER.info("listenEvent "+getClass().getName());
         for (var listener : listeners) {
-            Mod2Client.LOGGER.info("listener "+listener.getClass().getName());
+            NMKClient.LOGGER.info("listener "+listener.getClass().getName());
             listener.listenEvent(event);
         }
     }

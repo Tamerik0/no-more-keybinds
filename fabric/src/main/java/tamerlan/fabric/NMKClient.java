@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tamerlan.fabric.menu.Menu;
 
-public final class Mod2Client implements ClientModInitializer {
-    public static String MOD_ID = "mod2";
+public final class NMKClient implements ClientModInitializer {
+    public static String MOD_ID = "no_more_keybinds";
     public static Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final KeyBinding keyBinding = new KeyBinding("key.tamerlan.openscreen", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, "Tamerlan");
 

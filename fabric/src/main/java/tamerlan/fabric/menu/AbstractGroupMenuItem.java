@@ -29,7 +29,7 @@ public abstract class AbstractGroupMenuItem extends BaseGUIElement {
         context.getMatrices().push();
         context.getMatrices().scale(size/256, size/256, 1);
         RenderSystem.enableBlend();
-        context.drawTexture(Identifier.of("mod2","textures/ui/circle.png"),(int)center.x-128,(int)center.y-128,0,0,256,256);
+        context.drawTexture(Identifier.of("no_more_keybinds","textures/ui/circle.png"),(int)center.x-128,(int)center.y-128,0,0,256,256);
         RenderSystem.disableBlend();
         context.getMatrices().pop();
     }
