@@ -2,6 +2,7 @@ package tamerlan.fabric;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.Vec2f;
+import tamerlan.fabric.mixininterfaces.IExtendedMouse;
 
 public class Mouse {
     public static Vec2f getMousePos(){
@@ -10,6 +11,12 @@ public class Mouse {
     }
     public static Vec2f getMouseScreenPos(){
         return toScreenSpace(getMousePos());
+    }
+    public static Vec2f getMouseMenuPos(){
+        return ((IExtendedMouse)MinecraftClient.getInstance().mouse).getMenuCursorPos();
+    }
+    public static Vec2f getMouseMenuScreenPos(){
+        return toScreenSpace(getMouseMenuPos());
     }
     public static Vec2f toScreenSpace(Vec2f pos){
         var client = MinecraftClient.getInstance();

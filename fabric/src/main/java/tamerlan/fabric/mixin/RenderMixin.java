@@ -17,7 +17,7 @@ public class RenderMixin {
     private void render(RenderTickCounter tickCounter, boolean tick, CallbackInfo ci, @Local DrawContext drawContext) {
         drawContext.getMatrices().push();
         drawContext.getMatrices().translate(0, 0, 1000);
-        Menu.render(drawContext);
+        Menu.staticRender(drawContext);
         drawContext.getMatrices().pop();
     }
 }

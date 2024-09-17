@@ -9,6 +9,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.Vec2f;
+import org.lwjgl.glfw.GLFW;
 import tamerlan.fabric.Mouse;
 import tamerlan.fabric.data.RoundGroupData;
 import tamerlan.fabric.NMKClient;
@@ -29,7 +30,7 @@ public class Menu {
     public static void init() {
     }
 
-    public static void render(DrawContext context) {
+    public static void staticRender(DrawContext context) {
         var client = MinecraftClient.getInstance();
         if (instance != null) {
             int mouseX = (int) (((IExtendedMouse) client.mouse).getMenuCursorPos().x * (double) client.getWindow().getScaledWidth() / (double) client.getWindow().getWidth());
@@ -37,7 +38,7 @@ public class Menu {
 //            context.fill(mouseX-10, mouseY-10,mouseX+10,mouseY+10,10000,0xFFFFFF);
 //            context.fill(mouseX-10, mouseY-10,mouseX+10,mouseY+10,-10000,0xFFFFFF);
             context.drawItem(Items.ACACIA_BOAT.getDefaultStack(), mouseX, mouseY);
-            instance.render(context, mouseX, mouseY);
+            instance.render(context);
         }
     }
 
@@ -102,9 +103,16 @@ public class Menu {
         }
         rootItem = new RoundGroupMenuItem(null, centerPos, data, 0, 0);
     }
+    Vec2f dragPos;
+    public void render(DrawContext context) {
 
-    public void render(DrawContext context, int mouseX, int mouseY) {
-
+        if(GLFW.glfwGetMouseButton(MinecraftClient.getInstance().getWindow().getHandle(),GLFW.GLFW_MOUSE_BUTTON_3)==1){
+            NMKClient.LOGGER.info("aboba");
+            if(dragPos != null)
+                rootItem.translate(Mouse.getMouseMenuScreenPos().add(dragPos.multiply(-1)));
+            dragPos = Mouse.getMouseMenuScreenPos();
+        }else
+            dragPos = null;
         rootItem.render(context);
     }
 
