@@ -7,6 +7,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/no_more_keybinds.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/no_more_keybinds.common.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/no_more_keybinds.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/no_more_keybinds.fabric.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/no_more_keybinds.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/no_more_keybinds.fabric.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/tamerlan.no_more_keybinds.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/tamerlan.no_more_keybinds.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/tamerlan.no_more_keybinds.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/tamerlan.no_more_keybinds.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/tamerlan.no_more_keybinds.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/tamerlan.no_more_keybinds.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/tamerlan.no_more_keybinds.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/tamerlan.no_more_keybinds.fabric.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/tamerlan.no_more_keybinds.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/tamerlan.no_more_keybinds.fabric.test.iml" />
     </modules>
   </component>
 </project>
